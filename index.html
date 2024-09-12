@@ -1,0 +1,72 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" href="asset/logo.png" />
+    <title>Notes App</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Lato:wght@400;700&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <note-header></note-header>
+
+    <note-add></note-add>
+
+    <div class="popup" id="popup-1">
+      <div class="overlay"></div>
+      <div class="form-box">
+        <div class="form-header">
+          <h2>Add Note</h2>
+          <div class="close-form" onclick="togglePopup() " title="Close">
+            &times;
+          </div>
+        </div>
+        <form class="card-form" id="note-form">
+          <form-control
+            label="Title"
+            type="text"
+            input-name="title"
+            placeholder="Add title here ..."
+            min-length="3"
+            max-length="50"
+          ></form-control>
+          <div>
+            <label for="input-body">Note</label>
+            <textarea
+              name="body"
+              id="input-body"
+              class="form-control"
+              placeholder="Add note here ..."
+              minlength="5"
+              aria-describedby="body-validation"
+              required
+            ></textarea>
+            <p id="body-validation" class="error-message"></p>
+          </div>
+          <div>
+            <button class="submit" title="Create">Create</button>
+          </div>
+        </form>
+      </div>
+    </div>
+
+    <div class="container">
+      <div id="note-list" class="note-list"></div>
+      <h2 class="archive-title">Archived Notes</h2>
+      <div id="note-list-archive" class="note-list"></div>
+    </div>
+
+    <note-footer></note-footer>
+
+    <loading-indicator
+      id="loading-indicator"
+      style="display: none"
+    ></loading-indicator>
+  </body>
+</html>

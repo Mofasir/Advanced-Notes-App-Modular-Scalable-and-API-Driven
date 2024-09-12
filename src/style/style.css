@@ -1,0 +1,339 @@
+* {
+  box-sizing: border-box;
+}
+
+body {
+  width: 100%;
+  display: block;
+  margin: 0;
+  font-family: "Lato", sans-serif;
+  background-color: #1e1e1e;
+}
+
+.add-button {
+  position: fixed;
+  bottom: 20px;
+  right: 30px;
+  z-index: 1;
+}
+
+.add-button button {
+  height: 60px;
+  width: 60px;
+  background-color: #fbbc04;
+  box-shadow: 3px 3px 4px 0 rgba(0, 0, 0, 0.836);
+  border: none;
+  border-radius: 50px;
+  color: #1e1e1e;
+  font-size: 20px;
+  font-weight: 600;
+  transition: all 0.2s ease-in;
+  cursor: pointer;
+}
+
+.add-button button:hover {
+  width: 120px;
+  font-size: 16px;
+}
+
+.add-button button:hover::after {
+  content: " Add Note";
+  white-space: nowrap;
+}
+
+.popup .overlay {
+  position: fixed;
+  top: 0px;
+  left: 0px;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.7);
+  z-index: 1;
+  display: none;
+}
+
+.popup .form-box {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) scale(0);
+  background: #1e1e1e;
+  width: 100%;
+  max-width: 400px;
+  max-height: 80vh;
+  z-index: 2;
+  padding: 20px;
+  box-sizing: border-box;
+  border-radius: 5px;
+  display: flex;
+  flex-direction: column;
+}
+
+.popup .form-header {
+  display: flex;
+  justify-content: space-between;
+}
+
+.popup h2 {
+  margin: 0;
+  margin-bottom: 20px;
+  color: #fbbc04;
+}
+
+.popup .close-form {
+  width: 30px;
+  height: 30px;
+  background: #303030;
+  color: #fcf7eb;
+  font-size: 20px;
+  font-weight: 600;
+  line-height: 28px;
+  text-align: center;
+  border-radius: 50%;
+  cursor: pointer;
+  border: none;
+}
+
+.popup .close-form:hover {
+  background-color: #fbbc04;
+  color: #1e1e1e;
+}
+
+.popup .form-box .card-form {
+  color: #fcf7eb;
+  font-weight: bold;
+  font-size: 20px;
+  width: 100%;
+  overflow: auto;
+}
+
+.popup .form-box .card-form label {
+  display: block;
+  margin-bottom: 6px;
+}
+
+.popup .form-box .card-form .form-control {
+  width: 100%;
+  background-color: #1e1e1e;
+  color: #fcf7eb;
+  line-height: 1;
+  font-size: 16px;
+  font-family: "Lato", sans-serif;
+  border-style: none;
+}
+
+.popup .form-box .card-form textarea {
+  height: 150px;
+  box-sizing: border-box;
+  resize: none;
+  padding-top: 5px;
+}
+
+.popup .form-box .card-form .form-control:focus {
+  border: none;
+  outline: none;
+}
+
+.error-message {
+  color: #f56372de;
+  font-size: 14px;
+  margin-top: 6px;
+  visibility: hidden;
+}
+
+textarea:invalid ~ .error-message,
+input:invalid ~ .error-message {
+  visibility: visible;
+}
+
+.popup .form-box .card-form button {
+  width: 100%;
+  padding: 10px 0;
+  background-color: #303030;
+  color: #fcf7eb;
+  font-weight: 600;
+  cursor: pointer;
+  border-radius: 5px;
+  border: none;
+}
+
+.popup .form-box .card-form button:hover {
+  background-color: #fbbc04;
+  color: #1e1e1e;
+}
+
+.popup.active .overlay {
+  display: block;
+}
+
+.popup.active .form-box {
+  transition: all 300ms ease-in-out;
+  transform: translate(-50%, -50%) scale(1);
+}
+
+.container {
+  min-height: 80vh;
+}
+
+.note-list {
+  width: 100%;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 1rem;
+  padding: 25px 30px;
+}
+
+.note-list > * {
+  box-shadow: 0 2px 6px 0 hsla(0, 0%, 0%, 0.733);
+  background-color: #222222;
+  border-radius: 5px;
+  border: 1px solid #222222;
+  color: #fcf7eb;
+  padding: 16px;
+  padding-top: 0;
+  word-wrap: break-word;
+  word-break: break-word;
+  overflow-wrap: break-word;
+  height: 220px;
+  display: flex;
+  flex-direction: column;
+  cursor: pointer;
+}
+
+.note-list > *:hover {
+  border: 1px solid #fbbc04;
+  transition: all 0.3s ease-in-out;
+}
+
+.note-card {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.note-main {
+  flex-grow: 1;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
+.note-title {
+  color: #fbbc04;
+  font-weight: bold;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  margin-bottom: 8px;
+}
+
+.note-body {
+  flex-grow: 1;
+  white-space: pre-wrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 4;
+  -webkit-box-orient: vertical;
+  line-height: 1.2em;
+  max-height: 4.8em;
+}
+
+.note-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: auto;
+  padding-top: 8px;
+}
+
+.note-date {
+  font-size: 11px;
+  font-style: none;
+  color: #fcf7eb93;
+}
+
+.note-button {
+  align-self: flex-end;
+}
+
+.note-delete,
+.note-archive {
+  background-color: #303030;
+  color: #ffffff;
+  border: none;
+  border-radius: 2px;
+  padding: 6px 10px;
+  cursor: pointer;
+  font-size: 12px;
+  transition: background-color 0.2s ease;
+}
+
+.note-button img {
+  width: 16px;
+  height: 16px;
+}
+
+.note-archive:hover {
+  background-color: #fbbc04;
+}
+
+.note-delete:hover {
+  background-color: #ff1a1a;
+}
+
+.archive-title {
+  text-align: center;
+  color: #fcf7eb;
+  margin: 20px 0;
+  background-color: #303030;
+  padding: 10px 0;
+}
+
+.single-note-popup-container {
+  font-family: "Lato", sans-serif;
+  background-color: #222222;
+  color: #fcf7eb;
+}
+
+.single-note-popup {
+  text-align: left;
+}
+
+.single-note-body {
+  white-space: pre-wrap;
+  margin-bottom: 30px;
+}
+
+.single-note-date {
+  font-size: 12px;
+  color: #fcf7eb93;
+}
+
+.swal2-title {
+  color: #fbbc04 !important;
+}
+
+.swal2-close {
+  color: #fcf7eb !important;
+}
+
+.swal2-close:hover {
+  color: #fbbc04 !important;
+}
+
+.custom-confirm-button {
+  color: #1e1e1e;
+  background-color: #fbbc04;
+  font-weight: 600;
+}
+
+@media (max-width: 428px) {
+  .popup .form-box {
+    width: 95%;
+  }
+
+  .popup .form-box .card-form textarea {
+    height: 75px;
+  }
+}
